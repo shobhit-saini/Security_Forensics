@@ -1,7 +1,11 @@
 #include<iostream>
 #include<string.h>
 #include <bits/stdc++.h> 
-
+#include<stdlib.h>
+#include<sys/types.h>
+#include<sys/socket.h>
+#include<netinet/in.h>
+#include<unistd.h>
 using namespace std;
 int main()
 {
@@ -45,5 +49,31 @@ int main()
 	bin_msg1.append(encoded.substr(encoded.length()-n+1));
 	//cout<<encoded.substr(encoded.length()-n+1);
 	cout<<"newmsg:"<<bin_msg1;
+	
+	/**************************************************************************************************/
+     int server_socket;
+     server_socket=socket(AF_INET,SOCK_STREAM,0);
+
+      //define the server address
+      struct sockaddr_in server_address;
+       server_address.sin_family=AF_INET;
+       server_address.sin_port=htons(9007);//htons():Convert from Little to Big Endian
+       server_address.sin_addr.s_addr=INADDR_ANY;
+
+      //Bind the socket 
+      int bindfd = bind(server_socket,(struct sockaddr*)&server_address,sizeof(server_address));
+	    if(bindfd < 0)
+	    {	
+		    perror("Error");
+		    return 1;
+	    }
+       listen(server_socket,5);
+       int client_socket;
+       client_socket=accept(server_socket,NULL,NULL);
+       cout<<bin_msg1.length();
+       send(client_socket,bin_msg1.c_str(),bin_msg1.length(),0);
+      // write(client_socket,bin_msg1, sizeof(bin_msg1));
+    //close the socket
+     close(server_socket);
 	
 }
