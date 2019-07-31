@@ -42,6 +42,8 @@ int main()
 	 	}
 			for(;i<encoded.length()&&encoded[i]!='1';i++);
 	}
-	cout<<encoded.substr(encoded.length()-n+1);
+	bin_msg1.append(encoded.substr(encoded.length()-n+1));
+	//cout<<encoded.substr(encoded.length()-n+1);
+	cout<<"newmsg:"<<bin_msg1;
 	
 }
