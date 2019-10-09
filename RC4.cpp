@@ -53,9 +53,9 @@ int main()
     //////////////Decryption////////
     char d[1000];
     m = 0;
+    cout << "Decrypted message:";
     while (m != len)
     {
-       
         d[m] = c[m] ^ key[m];
         cout << d[m];
         m++;
